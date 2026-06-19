@@ -28,7 +28,11 @@
 #define DEFAULT_SCAN_CUR_FREQ 0
 #define DEFAULT_P2P_SEARCH_DELAY 500
 #define DEFAULT_RAND_ADDR_LIFETIME 60
+#ifdef XIAOMI_MIONE_WIFI
+#define DEFAULT_KEY_MGMT_OFFLOAD 0
+#else
 #define DEFAULT_KEY_MGMT_OFFLOAD 1
+#endif
 
 #include "config_ssid.h"
 #include "wps/wps.h"

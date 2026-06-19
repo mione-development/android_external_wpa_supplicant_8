@@ -448,6 +448,16 @@ struct wpa_config * wpa_config_read(const char *name, struct wpa_config *cfgp)
 	wpa_config_debug_dump_networks(config);
 	config->cred = cred_head;
 
+#ifdef XIAOMI_MIONE_WIFI
+	if (config->pmf != NO_MGMT_FRAME_PROTECTION ||
+	    config->key_mgmt_offload) {
+		wpa_printf(MSG_INFO, "mione_plus: disabling PMF/key mgmt "
+			   "offload for legacy Broadcom driver");
+		config->pmf = NO_MGMT_FRAME_PROTECTION;
+		config->key_mgmt_offload = 0;
+	}
+#endif
+
 #ifndef WPA_IGNORE_CONFIG_ERRORS
 	if (errors) {
 		wpa_config_free(config);
